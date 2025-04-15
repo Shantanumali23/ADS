@@ -45,6 +45,21 @@ public:
         }
         cout << endl;
     }
+
+    void DFS(int start) {
+        static int visited[MAX_NODES] = {0};  
+
+        if (visited[start] == 0) {
+            cout << start << " ";
+            visited[start] = 1;
+
+            for (int i = 0; i < v; i++) {
+                if (adj[start][i] == 1 && visited[i] == 0) {
+                    DFS(i);  
+                }
+            }
+        }
+    }
 };
 
 int main() {
@@ -59,6 +74,9 @@ int main() {
 
     cout << "BFS starting from vertex 0:\n";
     g.BFS(0);
+
+    cout << "DFS starting from vertex 0:\n";
+    g.DFS(0);
 
     return 0;
 }

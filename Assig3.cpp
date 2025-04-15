@@ -47,18 +47,28 @@ public:
     }
 
     void DFS(int start) {
-        static int visited[MAX_NODES] = {0};  
+        int visited[MAX_NODES] = {0};
+        int stack[MAX_NODES];
+        int top = -1;
 
-        if (visited[start] == 0) {
-            cout << start << " ";
-            visited[start] = 1;
+        stack[++top] = start;
 
-            for (int i = 0; i < v; i++) {
-                if (adj[start][i] == 1 && visited[i] == 0) {
-                    DFS(i);  
+        while (top >= 0) {
+            int node = stack[top--];
+
+            if (!visited[node]) {
+                cout << node << " ";
+                visited[node] = 1;
+
+                for (int i = v - 1; i >= 0; i--) {
+                    if (adj[node][i] == 1 && !visited[i]) {
+                        stack[++top] = i;
+                    }
                 }
             }
         }
+
+        cout << endl;
     }
 };
 
